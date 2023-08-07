@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { BooksModule } from './books/books.module';
+import { Book } from './books/entities/book.entity';
 
 @Module({
   imports: [
@@ -13,12 +14,12 @@ import { BooksModule } from './books/books.module';
     BooksModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'restapi',
-      entities: ['src/**/**.entity{.ts,.js}'],
+      host: process.env.DB_HOST_DEV,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      entities: [Book],
       synchronize: true,
     }),
   ],
