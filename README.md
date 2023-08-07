@@ -1,5 +1,4 @@
-````markdown
-# Nestjs API
+## Nestjs API
 
 This is a Books Management API it is a RESTful web service built with Nest.js, using a MySQL database with TypeORM for managing a collection of books. It provides endpoints to retrieve, create, update, and delete books in the collection.
 
@@ -12,6 +11,7 @@ To run the Books Management API locally, follow these steps:
 ```bash
 git clone https://github.com/eunicegigijacob/nestjsAPI
 ```
+
 ````
 
 2. Install dependencies:
@@ -103,3 +103,4 @@ The API is thoroughly tested using the Jest testing framework. To run the tests,
 ```bash
 npm run test
 ```
+````
