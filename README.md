@@ -1,73 +1,105 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+````markdown
+# Nestjs API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a Books Management API it is a RESTful web service built with Nest.js, using a MySQL database with TypeORM for managing a collection of books. It provides endpoints to retrieve, create, update, and delete books in the collection.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Getting Started
 
-## Description
+To run the Books Management API locally, follow these steps:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+1. Clone the repository:
 
 ```bash
-$ npm install
+git clone https://github.com/eunicegigijacob/nestjsAPI
 ```
+````
 
-## Running the app
+2. Install dependencies:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Test
+3. Set up the MySQL database:
+
+   - Create a new MySQL database with a name of your choice, make sure to add name in env file .
+   - Configure the database connection in the `.env` file. Copy the `.env.example` file to `.env` and update the following variables:
+
+   ```
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_USERNAME=your_db_username
+   DB_PASSWORD=your_db_password
+   DB_DATABASE=books_db
+   ```
+
+4. Start the development server:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Support
+The API should now be running at `http://localhost:3000`.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Endpoints
 
-## Stay in touch
+All endpoints are prefixed with `/api`.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Retrieve all books
 
-## License
+- **URL:** `/api/books`
+- **Method:** GET
+- **Response:** Returns an array of all the books in the collection.
 
-Nest is [MIT licensed](LICENSE).
+### Retrieve a specific book
+
+- **URL:** `/api/books/:id`
+- **Method:** GET
+- **URL Parameters:** `id` (number) - The ID of the book to retrieve.
+- **Response:** Returns the details of the book matching the provided ID.
+
+### Add a new book
+
+- **URL:** `/api/books`
+- **Method:** POST
+- **Request Body:** Should contain the book details in JSON format.
+  ```json
+  {
+    "title": "Book Title",
+    "author": "Book Author"
+  }
+  ```
+- **Response:** Returns the newly created book object.
+
+### Update an existing book
+
+- **URL:** `/api/books/:id`
+- **Method:** PUT
+- **URL Parameters:** `id` (number) - The ID of the book to update.
+- **Request Body:** Should contain the updated book details in JSON format.
+  ```json
+  {
+    "title": "Updated Book Title",
+    "author": "Updated Book Author"
+  }
+  ```
+- **Response:** Returns the updated book object.
+
+### Delete a book
+
+- **URL:** `/api/books/:id`
+- **Method:** DELETE
+- **URL Parameters:** `id` (number) - The ID of the book to delete.
+- **Response:** Returns a success message if the book was successfully deleted.
+
+## Error Handling
+
+The API handles various error scenarios and provides appropriate HTTP status codes and error messages. For example, if a book with the given ID is not found, the API will return a 404 Not Found status code with the message "Book not found."
+
+## Testing
+
+The API is thoroughly tested using the Jest testing framework. To run the tests, use the following command:
+
+```bash
+npm run test
+```
